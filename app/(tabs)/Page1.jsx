@@ -10,7 +10,7 @@ const Page1 = () => {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">My First App</ThemedText>
       </ThemedView>
-      <ThemedText style={styles.basicMargins}></ThemedText>
+      <ThemedText style={styles.basicMargins}>This app may contain sensitive content so take parental advise first</ThemedText>
       
     </View>
   )
