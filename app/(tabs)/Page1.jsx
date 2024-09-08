@@ -8,10 +8,11 @@ const Page1 = () => {
   return (
     <View>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">My First App</ThemedText>
+        <ThemedText style={styles.stepContainer} type="title">My First App</ThemedText>
       </ThemedView>
+      <ThemedView style={styles.stepContainer2}>
       <ThemedText style={styles.basicMargins}>This app may contain sensitive content so take parental advise first</ThemedText>
-      
+      </ThemedView>
     </View>
   )
 }
@@ -22,19 +23,25 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 100,
     gap: 8,
     backgroundColor: "white",
-    paddingTop: 10,
     paddingBottom: 10,
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "grey"
   },
   stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+    paddingTop: 100
+  },
+  stepContainer2:{
+    backgroundColor: "black",
   },
   basicMargins:{
-    marginTop: 10
+    
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingBottom: 10,
+    color: "white",
+    textAlign: "center"
   },
   reactLogo: {
     height: 178,
