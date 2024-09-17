@@ -61,7 +61,7 @@ const TabBar = ({state, descriptors, navigation}) => {
                 color: isFocused? 'orange' : '#737373'
               })
             }
-            <Text style={{ color: isFocused ? 'orange' : '#737373' }}>
+            <Text style={{fontSize: 12, color: isFocused ? 'orange' : '#737373' }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 10},
     shadowRadius: 10,
-    shadowOpacity: 0.1
+    shadowOpacity: 0.1,
+    fontSize: 10
   },
   tabBarItem: {
     flex: 1,
