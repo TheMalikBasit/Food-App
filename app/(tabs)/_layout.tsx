@@ -22,7 +22,8 @@ const _layout = () => {
       <Tabs.Screen 
         name='Orders'
         options={{
-          title: 'Order'
+          title: 'Order',
+          headerShown: false
       }}/>
       <Tabs.Screen 
         name='Profile'

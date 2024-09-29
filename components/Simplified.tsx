@@ -11,16 +11,16 @@ const Item = ({ title }) => {
         setIsFavoured((prev) => !prev);
     }
     return (
-        <Link href={'/NewScreen'} asChild>
+        <Link href={{ pathname: '/NewScreen', params: { id: title.ID, name: title.Name, IMAGE: title.Image, price: title.Price }}} asChild>
             <TouchableOpacity style={styles.container}>
-            <TouchableOpacity style={styles.favoriteButton} onPress={heartHander}>
-                <FontAwesome id='Heart' name="heart" size={20} color={isFovoured ? "orange" : "grey"} />
-            </TouchableOpacity>
-            <View style={styles.container1}>
-                <Image source={title.Image} style={styles.image}/>
-                <Text style={styles.foodName}>{title.Name}</Text>
-                <Text style={styles.foodPrice}>{title.Price}</Text>
-            </View>
+                <TouchableOpacity style={styles.favoriteButton} onPress={heartHander}>
+                    <FontAwesome id='Heart' name="heart" size={20} color={isFovoured ? "orange" : "grey"} />
+                </TouchableOpacity>
+                <View style={styles.container1}>
+                    <Image source={title.Image} style={styles.image}/>  
+                    <Text style={styles.foodName}>{title.Name}</Text>
+                    <Text style={styles.foodPrice}>{title.Price}</Text>
+                </View>
             </TouchableOpacity>
         </Link>
     );
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 15,
         padding: 10,
-
         alignItems: 'center',
         position: 'relative', // To position the heart icon
         shadowColor: '#000',

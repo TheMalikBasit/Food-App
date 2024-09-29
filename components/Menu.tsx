@@ -36,10 +36,28 @@ const AllFoods = [
       Image: require('@/assets/images/Burger 4.jpg'),
     },
     {
-      ID: 1,
+      ID: 7,
       Name: 'Burger',
       Price: '750 RS',
       Image: require('@/assets/images/Burger 1.jpg'),
+    },
+    {
+      ID: 8,
+      Name: 'Biryani',
+      Price: '250 RS',
+      Image: require('@/assets/images/Biryani1.jpg'),
+    },
+    {
+      ID: 9,
+      Name: 'Buffet',
+      Price: '2500 RS/Person',
+      Image: require('@/assets/images/Buffet.jpg'),
+    },
+    {
+      ID: 10,
+      Name: 'Chicken Biryani',
+      Price: '300 RS',
+      Image: require('@/assets/images/Biryani2.jpg'),
     }
   ];
 
