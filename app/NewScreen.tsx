@@ -25,10 +25,10 @@ const NewScreen = () => {
           </View>
       );
   }
-  const ordersHandler = () => {
-    setCartItems((prevItems) => [...prevItems, selectedItem]); // Add item to cart
-    console.log("Success", `${name} has been added to your cart!`)
-};
+//   const ordersHandler = () => {
+//     setCartItems((prevItems) => [...prevItems, selectedItem]); // Add item to cart
+//     console.log("Success", `${name} has been added to your cart!`)
+// };
     return (
         <View style={styles.container}>
             <Image source={selectedItem.Image} style={styles.image} />
@@ -37,7 +37,7 @@ const NewScreen = () => {
             </View>
             <View style={styles.container2}>
               <Text style={styles.foodPrice}>{price}</Text>
-              <TouchableOpacity style={styles.cartButton} onPress={ordersHandler}><Text>ADD TO CART</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.cartButton}><Text>ADD TO CART</Text></TouchableOpacity>
             </View>
         </View>
     );

@@ -4,11 +4,11 @@ import { Link } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
 import {useState} from 'react'
 
-const Item = ({ title }) => {
+const Item = ({ title }:any) => {
     const [isFovoured, setIsFavoured] = useState(title.state);
 
     const heartHander = () => {
-        setIsFavoured((prev) => !prev);
+        setIsFavoured(({prev}:any) => !prev);
     }
     return (
         <Link href={{ pathname: '/NewScreen', params: { id: title.ID, name: title.Name, IMAGE: title.Image, price: title.Price }}} asChild>
@@ -27,7 +27,7 @@ const Item = ({ title }) => {
 };
 
 
-export default function Simplified({myProps}) {
+export default function Simplified({myProps}:any) {
   return (
 
     <View>
