@@ -1,19 +1,19 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, Link, useRouter } from 'expo-router';
 import React from 'react';
 import AllFoods from '@/components/Menu';
 import { useState } from 'react';
 
-const NewScreen = () => {
+export default function NewScreen(){
     // Access the passed parameters using useLocalSearchParams because userouter was not working
     const { id, name, price } = useLocalSearchParams();
     
+    const router = useRouter();
+
     // values fetched from link in simplified tab are in string while ID in AllFoods array is int value so ve have to typecast anyone 
     let num: number = Number(id)
     
     console.log("From New Screen",num)
-    
-    const [cartItems, setCartItems] = useState([]);
 
     const selectedItem = AllFoods.find(item => item.ID === num);
     
@@ -24,11 +24,17 @@ const NewScreen = () => {
               <Text style={styles.errorText}>Item not found</Text>
           </View>
       );
-  }
-//   const ordersHandler = () => {
-//     setCartItems((prevItems) => [...prevItems, selectedItem]); // Add item to cart
-//     console.log("Success", `${name} has been added to your cart!`)
-// };
+    }
+
+    const handleAddToCart = () => {
+      // Navigate to Orders screen and pass the selected item
+      router.push({
+          pathname: '/Orders',
+          params: {
+              orderItems: [num], // You can modify this to add multiple items
+          },
+      });
+    };
     return (
         <View style={styles.container}>
             <Image source={selectedItem.Image} style={styles.image} />
@@ -37,13 +43,11 @@ const NewScreen = () => {
             </View>
             <View style={styles.container2}>
               <Text style={styles.foodPrice}>{price}</Text>
-              <TouchableOpacity style={styles.cartButton}><Text>ADD TO CART</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.cartButton} onPress={handleAddToCart}><Text>ADD TO CART</Text></TouchableOpacity>
             </View>
         </View>
     );
 };
-
-export default NewScreen;
 
 const styles = StyleSheet.create({
     container: {

@@ -5,17 +5,17 @@ import { AntDesign } from '@expo/vector-icons'
 const TabBar = ({ state, descriptors, navigation }: any) => {
 
   const icons:any = {
-    index: ({props}:any)=> <AntDesign name='home' size={26} color={'#737373'} {...props}/>,
-    Profile: ({props}:any)=> <AntDesign name='user' size={26} color={'#737373'} {...props}/>,
-    Menu: ({props}:any)=> <AntDesign name="book" size={24} color={'#737373'} {...props} />,
-    Orders: ({props}:any)=> <AntDesign name="shoppingcart" size={24} color={'#737373'} {...props} />,
-    Favorites: ({props}:any)=> <AntDesign name="hearto" size={24} color={'#737373'} {...props} />,
+    index: (props)=> <AntDesign name='home' size={26} color={'#737373'} {...props}/>,
+    Profile: (props)=> <AntDesign name='user' size={26} color={'#737373'} {...props}/>,
+    Menu: (props)=> <AntDesign name="book" size={24} color={'#737373'} {...props} />,
+    Orders: (props)=> <AntDesign name="shoppingcart" size={24} color={'#737373'} {...props} />,
+    Favorites: (props)=> <AntDesign name="hearto" size={24} color={'#737373'} {...props} />,
   };
 
 
   return (
     <View style={styles.tabbar}>
-      {state.routes.map(({route} : any, {index} : any) => {
+      {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
