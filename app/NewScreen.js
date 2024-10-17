@@ -3,6 +3,7 @@ import { useLocalSearchParams, Link, useRouter } from 'expo-router';
 import React from 'react';
 import AllFoods from '@/components/Menu';
 import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NewScreen(){
     // Access the passed parameters using useLocalSearchParams because userouter was not working
@@ -10,8 +11,8 @@ export default function NewScreen(){
     
     const router = useRouter();
 
-    // values fetched from link in simplified tab are in string while ID in AllFoods array is int value so ve have to typecast anyone 
-    let num: number = Number(id)
+    // values fetched from link in simplified tab are in string while ID in AllFoods array is int value so we have to typecast any one of em
+    let num = Number(id)
     
     console.log("From New Screen",num)
 
@@ -26,15 +27,23 @@ export default function NewScreen(){
       );
     }
 
-    const handleAddToCart = () => {
-      // Navigate to Orders screen and pass the selected item
-      router.push({
-          pathname: '/Orders',
-          params: {
-              orderItems: [num], // You can modify this to add multiple items
-          },
-      });
+    const handleAddToCart = async () => {
+      try{
+        const FetchedData = await AsyncStorage.getItem('AddedItems');
+        const AddedItems = FetchedData ? JSON.parse(FetchedData) : [];
+        const indexItem = AddedItems.findIndex(item => item.ID === selectedItem.ID);
+        if(indexItem !== -1){
+          AddedItems[indexItem].quantity += 1;
+        }else{
+          AddedItems.push(selectedItem);
+        }
+        await AsyncStorage.setItem('AddedItems', JSON.stringify(AddedItems));
+        console.log("Local storage code is executed")
+      }catch(error){
+        console.error("Failed to add item in cart");
+      }
     };
+
     return (
         <View style={styles.container}>
             <Image source={selectedItem.Image} style={styles.image} />
@@ -43,7 +52,9 @@ export default function NewScreen(){
             </View>
             <View style={styles.container2}>
               <Text style={styles.foodPrice}>{price}</Text>
-              <TouchableOpacity style={styles.cartButton} onPress={handleAddToCart}><Text>ADD TO CART</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.cartButton} onPress={handleAddToCart}>
+                <Text  style={styles.cartButtonText}>ADD TO CART</Text>
+              </TouchableOpacity>
             </View>
         </View>
     );
@@ -83,14 +94,14 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     cartButton: {
-      fontSize: 16,
       marginRight: 20,
-      backgroundColor: 'orange',
-      borderRadius: 40,
-      paddingTop: 7,
-      paddingBottom: 7,
-      paddingLeft: 7,
-      paddingRight: 7
+      borderRadius: 15,
+      padding: 15,
+      backgroundColor: '#000'
+    },
+    cartButtonText:{
+      color: '#FFFFFF',
+      fontSize: 12,
     },
     foodID: {
         fontSize: 16,

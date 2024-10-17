@@ -1,11 +1,22 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Tabs } from 'expo-router'
+import { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, Text } from 'react-native';
 
-const Home = () => {
+const Menu = () => {
+  useFocusEffect(() => {
+     
+      console.log('Screen is focused');
+
+      return () => {
+        console.log('Screen is unfocused');
+      };
+    });
+
   return (
-    <Tabs />
-  )
-}
+    <View>
+      <Text>This screen refreshes when focused</Text>
+    </View>
+  );
+};
 
-export default Home
+export default Menu;

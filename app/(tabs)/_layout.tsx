@@ -22,7 +22,7 @@ const _layout = () => {
       <Tabs.Screen 
         name='Orders'
         options={{
-          title: 'Order',
+          title: 'Cart',
           headerShown: false
       }}/>
       <Tabs.Screen 

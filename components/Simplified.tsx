@@ -8,7 +8,7 @@ const Item = ({ title }:any) => {
     const [isFovoured, setIsFavoured] = useState(title.state);
 
     const heartHander = () => {
-        setIsFavoured(({prev}:any) => !prev);
+        setIsFavoured((prev) => !prev);
     }
     return (
         <Link href={{ pathname: '/NewScreen', params: { id: title.ID, name: title.Name, IMAGE: title.Image, price: title.Price }}} asChild>
