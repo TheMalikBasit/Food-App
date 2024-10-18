@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Orders() {
+  
   const [Orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -14,8 +15,8 @@ export default function Orders() {
   const Increment = async (itemID) => {
     try {
       const updatedOrders = Orders.map(item => {
-        if (item.ID === itemID) {
-          return { ...item, quantity: item.quantity + 1 };
+        if (item.ID === itemID && item.quantity < 10) {
+          return { ...item, quantity: item.quantity + 1 }
         }
         return item;
       });
@@ -83,6 +84,8 @@ export default function Orders() {
   };
   const Item = ({ title }) => {
     console.log("This called from Item Function", title.ID);
+    
+    console.log("Quantity of item ID : ", title.ID ," is : " ,title.quantity)
     return (
       <View style={styles.OuterDiv}>
         <Image source={title.Image} style={styles.image} />
@@ -118,8 +121,15 @@ export default function Orders() {
 }
 
 const styles = StyleSheet.create({
+  FlexHandler: {
+    flex: .95
+  },
+  FlexHandler1: {
+    height: 30,
+    backgroundColor: 'black',
+    width: "100%"
+  },
   cartButton: {
-    marginBottom: 5,
     borderRadius: 15,
     padding: 15,
     backgroundColor: '#000',

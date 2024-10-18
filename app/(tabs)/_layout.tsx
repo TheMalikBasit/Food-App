@@ -33,7 +33,8 @@ const _layout = () => {
       <Tabs.Screen 
         name='Favorites'
         options={{
-          title: 'Favorites'
+          title: 'Favorites',
+          headerShown: false
       }}/>
     </Tabs>
   )

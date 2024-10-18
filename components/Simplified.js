@@ -1,20 +1,42 @@
 import { StyleSheet, Image, View, Text, FlatList, Pressable, TouchableOpacity } from 'react-native';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
 import {useState} from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AllFoods from './Menu';
 
-const Item = ({ title }:any) => {
-    const [isFovoured, setIsFavoured] = useState(title.state);
-
+const Item = ({ title }) => {
+    const [isFovoured, setIsFavoured] = useState(true);
+    
     const heartHander = () => {
         setIsFavoured((prev) => !prev);
+    }
+
+    const FavouriteHandler = async (itemID) => {
+        const selectedItem = AllFoods.find(item => item.ID === itemID);
+        try {
+            heartHander();
+            const AllFavour = await AsyncStorage.getItem("AddedFavourites");
+            const AddedFavourites = AllFavour ? JSON.parse(AllFavour) : [];
+            const Checker = AddedFavourites.findIndex(item => item.ID === selectedItem.ID);
+            if(Checker === -1 && isFovoured){
+                AddedFavourites.push(selectedItem);
+                console.log("Item with ID : ", itemID , " is added to favourites");
+            }else if(Checker !== -1 && !isFovoured){
+                AddedFavourites.splice(Checker, 1);
+                console.log("Item with ID : ", itemID , " is removed from favourites");
+            }
+            await AsyncStorage.setItem("AddedFavourites", JSON.stringify(AddedFavourites));
+        } catch (error) {
+            console.log("Failed to add item in Favourites")
+        }
     }
     return (
         <Link href={{ pathname: '/NewScreen', params: { id: title.ID, name: title.Name, IMAGE: title.Image, price: title.Price }}} asChild>
             <TouchableOpacity style={styles.container}>
-                <TouchableOpacity style={styles.favoriteButton} onPress={heartHander}>
-                    <FontAwesome id='Heart' name="heart" size={20} color={isFovoured ? "orange" : "grey"} />
+                <TouchableOpacity style={styles.favoriteButton} onPress={() =>{FavouriteHandler(title.ID)}}>
+                    <FontAwesome id='Heart' name="heart" size={20} color={isFovoured ? "grey" : "orange"} />
                 </TouchableOpacity>
                 <View style={styles.container1}>
                     <Image source={title.Image} style={styles.image}/>  
@@ -26,20 +48,28 @@ const Item = ({ title }:any) => {
     );
 };
 
+// const clearFavouritesData = async () => {
+//     try {
+//       await AsyncStorage.removeItem('AddedFavourites');
+//       console.log('Favourites data cleared');
+//     } catch (error) {
+//       console.error('Error clearing Favourites data:', error);
+//     }
+//   };
 
-export default function Simplified({myProps}:any) {
-  return (
 
-    <View>
-      <FlatList
-        data={myProps}
-        renderItem={({ item }) => <Item title={item}/>}
-        keyExtractor={item => item.ID}
-        numColumns={2}
-        contentContainerStyle = {{gap:10, padding:10}}
-        columnWrapperStyle = {{gap:10}}
-      />
-    </View>
+export default function Simplified({myProps}) {
+return (
+<View>
+    <FlatList
+      data={myProps}
+      renderItem={({ item }) => <Item title={item}/>}
+      keyExtractor={item => item.ID}
+      numColumns={2}
+      contentContainerStyle = {{gap:10, padding:10}}
+      columnWrapperStyle = {{gap:10}}
+    />
+</View>
   )
 }
 
@@ -63,6 +93,18 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         elevation: 5, // For Android shadow
     },
+    cartButton: {
+        borderRadius: 15,
+        padding: 15,
+        backgroundColor: '#000',
+        color: "White",
+        width: "98%"
+    },
+    cartButtonText: {
+        color: '#FFFFFF',
+        fontSize: 15,
+        textAlign: 'center'
+    },
     container1: {
         alignItems: 'center',
         position: 'relative', // To position the heart icon
@@ -83,9 +125,14 @@ const styles = StyleSheet.create({
     },
     favoriteButton: {
         position: 'absolute',
-        top: 10,
-        right: 10,
-        zIndex: 1
+        top: 1,
+        right: 1,
+        zIndex: 1,
+        paddingRight: 7,
+        paddingLeft: 7,
+        paddingTop: 7,
+        paddingBottom: 7,
+        borderRadius: 10
     },
     image: {
         width: 130, // Adjust based on your preference

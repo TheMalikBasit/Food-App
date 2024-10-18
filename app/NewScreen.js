@@ -8,8 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function NewScreen(){
     // Access the passed parameters using useLocalSearchParams because userouter was not working
     const { id, name, price } = useLocalSearchParams();
-    
-    const router = useRouter();
 
     // values fetched from link in simplified tab are in string while ID in AllFoods array is int value so we have to typecast any one of em
     let num = Number(id)
@@ -32,13 +30,15 @@ export default function NewScreen(){
         const FetchedData = await AsyncStorage.getItem('AddedItems');
         const AddedItems = FetchedData ? JSON.parse(FetchedData) : [];
         const indexItem = AddedItems.findIndex(item => item.ID === selectedItem.ID);
-        if(indexItem !== -1){
+        if(indexItem != -1){
           AddedItems[indexItem].quantity += 1;
+          console.log("Item incremented");
         }else{
+          selectedItem.quantity = 1;
           AddedItems.push(selectedItem);
+          console.log("Item Added for the first time");
         }
         await AsyncStorage.setItem('AddedItems', JSON.stringify(AddedItems));
-        console.log("Local storage code is executed")
       }catch(error){
         console.error("Failed to add item in cart");
       }
