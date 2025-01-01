@@ -107,22 +107,25 @@ export default function Orders() {
   };
 
   return (
-    <View style={styles.container}>
+  <View style={styles.FlexHandler}>
       <TouchableOpacity style={styles.cartButton} onPress={clearCartData}>
         <Text  style={styles.cartButtonText}>Clear Cart</Text>
       </TouchableOpacity>
+      <View style={styles.container}>
       <FlatList
         data={Orders}
         renderItem={({ item }) => <Item title={item} />}
         keyExtractor={(item) => item.ID}
       />
     </View>
+  </View>
   );
 }
 
 const styles = StyleSheet.create({
   FlexHandler: {
-    flex: .95
+    flex: 1,
+    alignItems: "center",
   },
   FlexHandler1: {
     height: 30,
@@ -134,7 +137,8 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#000',
     color: "White",
-    width: "98%"
+    width: "95%",
+    marginTop: 10 
   },
   QuantityContainer: {
     display: 'flex',
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   OuterDiv: {
-    width: '99%',
+    width: '97%',
     marginTop: 10,
     display: 'flex',
     flexDirection: 'row',
@@ -237,3 +241,180 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
 });
+
+
+// import React, { useContext } from 'react';
+// import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+// import { CartContext } from '@/components/CartContext';
+
+// export default function Orders() {
+//   const { cartItems, updateQuantity, clearCart, removeFromCart } =
+//     useContext(CartContext);
+
+//   const Increment = (itemID) => {
+//     const item = cartItems.find((item) => item.ID === itemID);
+//     if (item && item.quantity < 10) {
+//       updateQuantity(itemID, item.quantity + 1);
+//     }
+//   };
+
+//   const Decrement = (itemID) => {
+//     const item = cartItems.find((item) => item.ID === itemID);
+//     if (item && item.quantity > 1) {
+//       updateQuantity(itemID, item.quantity - 1);
+//     }
+//   };
+
+//   const Item = ({ title }) => {
+//     return (
+//       <View style={styles.OuterDiv}>
+//         <Image source={title.Image} style={styles.image} />
+//         <View style={styles.InnerContainer}>
+//           <TouchableOpacity onPress={() => Increment(title.ID)}>
+//             <Text style={styles.QuantityPlus}>+</Text>
+//           </TouchableOpacity>
+//           <TouchableOpacity onPress={() => Decrement(title.ID)}>
+//             <Text style={styles.QuantityMinus}>-</Text>
+//           </TouchableOpacity>
+//           <Text>{title.quantity}</Text>
+//         </View>
+//         <View style={styles.InnerContainer}>
+//           <Text style={styles.foodName}>{title.Name}</Text>
+//           <Text style={styles.foodPrice}>{title.Price}</Text>
+//         </View>
+//       </View>
+//     );
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <TouchableOpacity style={styles.cartButton} onPress={clearCart}>
+//         <Text style={styles.cartButtonText}>Clear Cart</Text>
+//       </TouchableOpacity>
+//       <FlatList
+//         data={cartItems}
+//         renderItem={({ item }) => <Item title={item} />}
+//         keyExtractor={(item) => item.ID}
+//       />
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   FlexHandler: {
+//     flex: .95
+//   },
+//   FlexHandler1: {
+//     height: 30,
+//     backgroundColor: 'black',
+//     width: "100%"
+//   },
+//   cartButton: {
+//     borderRadius: 15,
+//     padding: 15,
+//     backgroundColor: '#000',
+//     color: "White",
+//     width: "98%"
+//   },
+//   QuantityContainer: {
+//     display: 'flex',
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-between'
+//   },
+//   QuantityCounterContainer :{
+//     fontSize: 18,
+//     borderColor: 'black',
+//     borderWidth: 3,
+//     borderStyle: 'solid',
+//     marginTop: 10,
+//     paddingRight: 10,
+//     paddingLeft: 10,
+//     paddingTop: 1,
+//     paddingBottom: 1,
+//     borderRadius: 7,
+//     textAlign: "center"
+//   },
+//   QuantityPlus:{
+//     fontSize: 18,
+//     borderColor: 'black',
+//     borderWidth: 3,
+//     borderStyle: 'solid',
+//     marginRight: 10,
+//     paddingRight: 10,
+//     paddingLeft: 10,
+//     paddingTop: 1,
+//     paddingBottom: 1,
+//     borderRadius: 10,
+//     textAlign: "center"
+//   },
+//   QuantityMinus: {
+//     fontSize: 18,
+//     borderColor: 'black',
+//     borderWidth: 3,
+//     borderStyle: 'solid',
+//     paddingRight: 10,
+//     paddingLeft: 10,
+//     paddingTop: 1,
+//     paddingBottom: 1,
+//     borderRadius: 10,
+//     textAlign: "center"
+//   },
+//   cartButtonText: {
+//     color: '#FFFFFF',
+//     fontSize: 15,
+//     textAlign: 'center'
+//   },
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     flexDirection: 'column',
+//   },
+//   errorText: {
+//     fontSize: 18,
+//     color: 'red',
+//   },
+//   OuterDiv: {
+//     width: '99%',
+//     marginTop: 10,
+//     display: 'flex',
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     backgroundColor: '#fff',
+//     borderRadius: 15,
+//     padding: 10,
+//     position: 'relative',
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.1,
+//     shadowRadius: 5,
+//     elevation: 5,
+//   },
+//   InnerContainer: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     justifyContent: 'space-between'
+//   },
+//   image: {
+//     width: 160,
+//     height: 130,
+//     borderRadius: 20,
+//   },
+//   foodName: {
+//     fontSize: 16,
+//     fontWeight: 'bold',
+//     marginBottom: 30
+//   },
+//   foodPrice: {
+//     fontSize: 16,
+    
+//   },
+//   foodCount: {
+//     fontSize: 14,
+//     color: 'gray',
+//   },
+// });
+

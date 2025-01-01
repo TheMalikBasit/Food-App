@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import {useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllFoods from './Menu';
+import { AntDesign } from '@expo/vector-icons'
 
 const Item = ({ title }) => {
     const [isFovoured, setIsFavoured] = useState(true);
@@ -60,7 +61,15 @@ const Item = ({ title }) => {
 
 export default function Simplified({myProps}) {
 return (
-<View>
+<View style={styles.Display}>
+    <View style={styles.cartButton}>
+        <TouchableOpacity>
+            <Link href={{ pathname: '/(tabs)/Profile'}}>
+                <AntDesign name='user' size={29} color={'#737373'}/>
+            </Link>
+        </TouchableOpacity>
+        <Text style={styles.foodName}>Malik Abdul Basit</Text>
+    </View>
     <FlatList
       data={myProps}
       renderItem={({ item }) => <Item title={item}/>}
@@ -74,6 +83,10 @@ return (
 }
 
 const styles = StyleSheet.create({
+    Display :{
+        flex: 1,
+        alignItems: 'center',
+    },
     CenteralContainer: {
         display: 'flex',
         flexDirection: 'row',
@@ -94,12 +107,23 @@ const styles = StyleSheet.create({
         elevation: 5, // For Android shadow
     },
     cartButton: {
-        borderRadius: 15,
-        padding: 15,
-        backgroundColor: '#000',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: "flex-start",
+        alignItems: 'center',
         color: "White",
-        width: "98%"
-    },
+        width: "95%",
+        marginTop: 10,
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        padding: 10,
+        position: 'relative', // To position the heart icon
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 5,
+      },
     cartButtonText: {
         color: '#FFFFFF',
         fontSize: 15,

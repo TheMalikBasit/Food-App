@@ -112,3 +112,37 @@ const styles = StyleSheet.create({
       color: 'red',
   },
 });
+
+
+
+// import React, { useContext } from 'react';
+// import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+// import { CartContext } from '@/components/CartContext';
+
+// export default function NewScreen() {
+//   const { addToCart } = useContext(CartContext);
+
+//   const sampleItem = {
+//     ID: '1',
+//     Name: 'Pizza',
+//     Price: 200,
+//     Image: require('@/assets/images/Pizza 1.jpg'),
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <TouchableOpacity
+//         style={styles.button}
+//         onPress={() => addToCart(sampleItem)}
+//       >
+//         <Text style={styles.buttonText}>Add Pizza to Cart</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+//   button: { padding: 10, backgroundColor: 'blue', borderRadius: 5 },
+//   buttonText: { color: 'white', fontWeight: 'bold' },
+// });

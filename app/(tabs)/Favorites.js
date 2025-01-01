@@ -86,7 +86,8 @@ export default function Favourites() {
 
 const styles = StyleSheet.create({
   Displayings :{
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
   },
 container: {
   width: '49%', // 50% of the screen width
@@ -136,7 +137,8 @@ cartButton: {
   padding: 15,
   backgroundColor: '#000',
   color: "White",
-  width: "98%"
+  width: "95%",
+  marginTop: 10 
 },
 cartButtonText: {
   color: '#FFFFFF',
