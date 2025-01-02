@@ -5,7 +5,7 @@ import * as Animatable from "react-native-animatable";
 const AnimatedContainers = () => {
   return (
     <View style={styles.screen}>
-      {Array.from({ length: 5 }).map((_, index) => (
+      {Array.from({ length: 4 }).map((_, index) => (
         <Animatable.View
           key={index}
           animation="tada"
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 5,
-    backgroundColor: "purple",
+    backgroundColor: "tomato",
     marginVertical: 10,
   },
 });
